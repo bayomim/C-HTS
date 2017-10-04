@@ -9,14 +9,14 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import edu.adapt.tcd.nlp.text.TextProcessor;
+import ie.adapt.tcd.nlp.text.TextProcessor;
 
 /**
- * 
- * @author Mostafa Bayomi
  * A class to have all input output operations like:
  * 	- Read all files in a folder.
  * 	- Read a single document file and return it as text
+ * @author Mostafa Bayomi
+ * 
  */
 public class DocsReader {
 	ArrayList<String> filesList;
@@ -92,18 +92,5 @@ public class DocsReader {
 	}
 	
 	
-	/**
-	 * Testing this class
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		/*
-		 DocsReader d = new DocsReader();
-		 
-		ArrayList<String> allFiles = d.navigateFolder(new File("data/testFolder"),new FilesFilter(new String []{"sent"}));
-		for (Object filePath: allFiles) {
-			d.readFile(filePath.toString());
-		}
-		*/
-	}
+	
 }
