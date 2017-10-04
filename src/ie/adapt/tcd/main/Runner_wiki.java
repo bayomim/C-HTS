@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import ie.adapt.tcd.iostream.DocsReader;
 import ie.adapt.tcd.nlp.segmenter.HAC;
-import ie.adapt.tcd.nlp.text.TextDocument;
+import ie.adapt.tcd.nlp.text.Document;
 import ie.adapt.tcd.utils.MyIO;
 
 public class Runner_wiki {
@@ -26,7 +26,7 @@ public class Runner_wiki {
 			
 			
 			System.out.println("WORKING ON FILE: "+currentFileName);
-			TextDocument doc = new TextDocument(filePath,sBreaker);
+			Document doc = new Document(filePath,sBreaker);
 			hac.run(doc,2);
 			String oneFileString= "";
 			int size = hac.getLevelsBoundaries().size();

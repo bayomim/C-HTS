@@ -1,14 +1,12 @@
 package ie.adapt.tcd.nlp.text;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import esaz
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import edu.wiki.index.WikipediaAnalyzer;
 
 public class TextProcessor {
 	WikipediaAnalyzer analyzer;

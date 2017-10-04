@@ -7,8 +7,7 @@ import edu.wiki.api.concept.IConceptVector;
 import edu.wiki.api.concept.scorer.CosineScorer;
 import edu.wiki.concept.ConceptVectorSimilarity;
 import edu.wiki.search.MongoESASearcher;
-import ie.adapt.tcd.nlp.pooling.TermsPool;
-import ie.adapt.tcd.nlp.text.TextDocument;
+import ie.adapt.tcd.nlp.text.Document;
 /**
  * A class to wrap the ESA library. It has the needed methods to measure the relatedness between two sentences.
  * @author Mostafa Bayomi</br>
@@ -19,7 +18,7 @@ public class Relatedness {
 	TermsPool termsPool;
 	ConceptVectorSimilarity sim = new ConceptVectorSimilarity(new CosineScorer());
 	
-	public Relatedness (TextDocument doc){
+	public Relatedness (Document doc){
 		termsPool = doc.termsPool;
 		try {
 			esa = new MongoESASearcher();

@@ -4,7 +4,7 @@ import java.io.File;
 
 import ie.adapt.tcd.iostream.DocsReader;
 import ie.adapt.tcd.nlp.segmenter.HAC;
-import ie.adapt.tcd.nlp.text.TextDocument;
+import ie.adapt.tcd.nlp.text.Document;
 import ie.adapt.tcd.utils.MyIO;
 
 public class Runner_haps {
@@ -18,7 +18,7 @@ public class Runner_haps {
 		File fileToWrite = new File(resultsFilePath);
 		for (String filePath : reader.getFilesList()) {
 			System.out.println("WORKING ON FILE: "+filePath);
-			TextDocument doc = new TextDocument(filePath,sBreaker);
+			Document doc = new Document(filePath,sBreaker);
 			hac.run(doc,3);
 			String level_string = doc.getFileName()+"\n";
 			int size = hac.getLevelsBoundaries().size();

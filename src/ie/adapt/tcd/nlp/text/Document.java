@@ -8,11 +8,10 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import ie.adapt.tcd.iostream.DocsReader;
-import ie.adapt.tcd.nlp.pooling.TermsPool;
 /**
  * 
  * @author Mostafa Bayomi
- * This class is to hold a text document that is being processed. 
+ * This class is to hold the document that is being processed. 
  * The class has different methods to help in getting the required fields in the document to be used in processing that document.
  * It has functionalities to retrieve:<br><ul>
  * 	- The document's text,
@@ -22,44 +21,19 @@ import ie.adapt.tcd.nlp.pooling.TermsPool;
  * 	- tokens of each sentence
  */
 
-public class TextDocument {
+public class Document {
 	private String documentText="";
-	public TermsPool termsPool;
-	ArrayList<String> docSentences;
-	private ArrayList<String> documentUniqueTerms;
-	/**
-	 * How a document tree looks like:
-	 * {[level,[[segment1],segment2],...],..}
-	 * {[
-	 * [
-	 * 		0,
-	 * 			[[0],[1,2],[3],[4,5],[6,7],[8,9],[10]]
-	 * 	],
-	 * 	[	1,
-	 * 			[[0,1,2],[3],[4,5,6,7],[8,9,10]]
-	 * 	]
-	 * ]}
-	 **/
-	//private TreeMap <Integer, TreeMap<Integer,int[]>>tree;
+	public ArrayList<String> docSentences;
 	private TextProcessor tp;
 	String sentencesBreak = null;
-	private ArrayList<ArrayList<String>> sentencesAsTerms;
 	private String filePath="";
-	public ArrayList<ArrayList<String>> getSentencesAsTerms() {
-		return sentencesAsTerms;
-		
-	}
-	public void setSentencesAsTerms(ArrayList<ArrayList<String>> sentencesAsTerms) {
-		this.sentencesAsTerms = sentencesAsTerms;
-	}
-	public TextDocument(String filePath, String sBreak){
-		termsPool = null;
+	
+	
+	public Document(String filePath, String sBreak){
 		this.filePath = filePath;
-		//tree = new TreeMap <Integer, TreeMap<Integer,int[]>>();
 		sentencesBreak = sBreak;
 		documentText = DocsReader.readFile(filePath);
 		
-		sentencesAsTerms = new ArrayList<ArrayList<String>>();
 		try {
 			tp = new TextProcessor();
 		} catch (IOException e) {

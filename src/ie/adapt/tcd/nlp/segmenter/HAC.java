@@ -1,11 +1,10 @@
 package ie.adapt.tcd.nlp.segmenter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.TreeMap;
 
 import ie.adapt.tcd.nlp.text.DocumentProcessor;
-import ie.adapt.tcd.nlp.text.TextDocument;
+import ie.adapt.tcd.nlp.text.Document;
 
 /**
  * @author: Mostafa Bayomi
@@ -13,7 +12,7 @@ import ie.adapt.tcd.nlp.text.TextDocument;
  **/
 public class HAC {
 	DocumentProcessor dp;
-	TextDocument doc;
+	Document doc;
 	private int numberOfNodes;
 	int numOfLevels=0;
 	TreeMap<Integer, ArrayList<int []>> levels;
@@ -58,69 +57,24 @@ public class HAC {
 			currentLevelSegments = dp.getCombinations();
 			levels.put(currentLevel, currentLevelSegments); //no need for it in the segmentation evaluation
 			ArrayList<int []> currentLevelUpdatedSegments = currentLevelSegments;
-			if(currentLevel>0){
-				currentLevelUpdatedSegments = createNextLevel();
-			}
+			
 			levelsBoundaries.put(currentLevel, dp.getBoundaries(currentLevelUpdatedSegments)); // just in the segmentation evaluation
 			// update the document with the new segments
-			doc.setSentencesAsTerms(dp.updateDocument(currentLevelSegments));
+			doc.docSentences = dp.updateDocument(currentLevelSegments);
 			
-			numberOfNodes = doc.getSentencesAsTerms().size();
+			numberOfNodes = doc.docSentences.size();
 		
 			
 			
 	}
 	
-	public void run(TextDocument _doc, int highLevelNumOfSegments) {
+	public void run(Document _doc, int highLevelNumOfSegments) {
 		doc = _doc;
-		numberOfNodes = doc.getSentencesAsTerms().size();
+		numberOfNodes = doc.docSentences.size();
 		dp.change(doc); // give the Document Processor a new document.
 		while(numberOfNodes > highLevelNumOfSegments){
 			runHac();
 		}
-		/*
-		for (int i = 0; i < levelsBoundaries.size(); i++) {
-			System.out.println("==Level "+i+"==");
-			int[] t = levelsBoundaries.get(i);
-			for (int j : t) {
-				System.out.println(j);
-			}
-			System.out.println("\n--------------------------------\n");
-		}
-		*/
-		//long endTime   = System.currentTimeMillis();
-		//long totalTime = endTime - startTime;
-		//System.out.println("Total Time:"+totalTime);
-	}
-	private void getBoundaries(){
-		for (int i = levels.size()-1; i >= 0 ; i--) {
-			ArrayList<int[]> level = levels.get(i);
-			//ArrayList<E> x = new ArrayList<>();
-		}
-	}
-	private ArrayList<int[]> createNextLevel(){
-		int prevLevel = currentLevel-1; // starting from the second level
-		ArrayList<int[]> prevLevelList = levels.get(prevLevel);
-		ArrayList<int[]> currentLevelUpdatedList = new ArrayList<int[]> (); // the new level segments 
-		for (int i = 0; i < currentLevelSegments.size() ; i++) {
-			int[] segment = currentLevelSegments.get(i);
-			ArrayList<Integer>newActualSegment = new ArrayList<Integer>(); 
-			for (int j = 0; j < segment.length; j++) { // I have to do all of that because Java SUCKS, it cann't add two arrays together
-				int sentenceNumber = segment[j]; 
-				int actualSN []= prevLevelList.get(sentenceNumber);
-				for (int v = 0; v < actualSN.length; v++) {
-					newActualSegment.add(actualSN[v]);
-				}
-				
-			}
-			int [] ar = new int[newActualSegment.size()];
-			for (int k = 0; k <newActualSegment.size(); k++) {
-				ar[k] = newActualSegment.get(k);
-			}
-			currentLevelUpdatedList.add(ar);
-		}
 		
-		levels.put(currentLevel, currentLevelUpdatedList);
-		return currentLevelUpdatedList;
 	}
 }

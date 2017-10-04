@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import ie.adapt.tcd.nlp.esa.Relatedness;
 
 public class DocumentProcessor {
-	TextDocument doc;
+	Document doc;
 	Relatedness relatedness;
 	/**
 	 *  <b>Integer: The level</b><br>
@@ -22,7 +22,7 @@ public class DocumentProcessor {
 	TreeMap<Integer, TreeMap<int[],String>> levelsBoundaries;
 	//{[0,"[0]-[1,2]-[3]-[4,5]-[6]-[7,8]-[9,10]-[11,12]"}
 	
-	public void change(TextDocument _doc){
+	public void change(Document _doc){
 		 doc = _doc;
 		 relatedness = new Relatedness(doc);
 	}
@@ -167,9 +167,9 @@ public class DocumentProcessor {
 	 * their tokens will be will be merged together and will be treated as one sentence.
 	 * @param combinations combinations between segments e.g. {[0],[1,2],[3],[4,5],...}
 	 */
-	public ArrayList<ArrayList<String>> updateDocument(ArrayList<int []> combinations){
-		ArrayList<ArrayList<String>> oldSentencesAsTerms =  doc.getSentencesAsTerms();
-		ArrayList<ArrayList<String>> newSentencesAsTerms =  new ArrayList<ArrayList<String>>();
+	public ArrayList<String> updateDocument(ArrayList<int []> combinations){
+		ArrayList<String> oldSentencesAsTerms =  doc.docSentences;
+		ArrayList<String> newSentencesAsTerms =  new ArrayList<String>();
 		
 		for (int [] sentencesArray: combinations) {
 			if (sentencesArray.length == 1){
@@ -180,11 +180,10 @@ public class DocumentProcessor {
 			else{ // two indexes, i.e. two sentences to be merged as one sentence
 				int s_1_Index = sentencesArray[0]; // first sentence in the combination
 				int s_2_Index = sentencesArray[1]; // second sentence in the combination
-				ArrayList<String> s_1_tokens = oldSentencesAsTerms.get(s_1_Index);
-				ArrayList<String> s_2_tokens = oldSentencesAsTerms.get(s_2_Index);
-				s_1_tokens.addAll(s_2_tokens);
-				// note: I can make this in one step, but I prefer to make the code more clear
-				newSentencesAsTerms.add(s_1_tokens);
+				String s1  = oldSentencesAsTerms.get(s_1_Index);
+				String s2  = oldSentencesAsTerms.get(s_2_Index);
+				s1+=" "+s2;
+				newSentencesAsTerms.add(s1);
 			}
 		}
 		return newSentencesAsTerms;
@@ -206,11 +205,4 @@ public class DocumentProcessor {
 		return sortedEntries;
 	}
 	
-	public static void main(String[] args) {
-		/*String path = "data/testFolder/ch1_an1.txt";
-		TextDocument td = new TextDocument(path);
-		DocumentProcessor dp = new DocumentProcessor(td);
-		*/
-		//dp.getCombinations();
-	}
 }
