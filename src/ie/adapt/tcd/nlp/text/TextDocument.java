@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import edu.adapt.tcd.iostream.DocsReader;
+import ie.adapt.tcd.iostream.DocsReader;
 import ie.adapt.tcd.nlp.pooling.TermsPool;
 /**
  * 

@@ -3,7 +3,7 @@ package ie.adapt.tcd.main;
 import java.io.File;
 import java.util.regex.Pattern;
 
-import edu.adapt.tcd.iostream.DocsReader;
+import ie.adapt.tcd.iostream.DocsReader;
 import ie.adapt.tcd.nlp.segmenter.HAC;
 import ie.adapt.tcd.nlp.text.TextDocument;
 import ie.adapt.tcd.utils.MyIO;
