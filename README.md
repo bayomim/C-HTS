@@ -5,7 +5,9 @@ C-HTS: A Concept-based Hierarchical Text Segmentation approach
 Mostafa Bayomi, Séamus Lawless 
 
 ADAPT Centre, Knowledge and Data Engineering Group, 
+
 School of Computer Science and Statistics, Trinity College Dublin, Dublin, Ireland
+
 bayomim@tcd.ie, seamus.lawless@scss.tcd.ie
 
 This is an implementatio for C-HTS algorithm
