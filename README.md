@@ -17,7 +17,7 @@ There is a documentation in this link on how to make MongoDB pointing to the con
 
 The code is documented in general. Each class and each method has a full explanation on what it really does.
 
-Please cite our paper if you publish material based on this dataset.
+Please cite our paper if you publish material based on this code or dataset.
 
     @InProceedings{BAYOMI18.806,
     author = {Mostafa Bayomi and Seamus Lawless},
